@@ -1,0 +1,67 @@
+[core]
+	autocrlf = input
+	quotepath = false
+	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+	excludesfile = /Users/drudge/.gitignore
+[log]
+	decorate = full
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+[user]
+	name = Nicholas Penree
+	email = nick@penree.com
+[github]
+	user = drudge
+[apply]
+	whitespace = fix
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+	log = true
+[alias]
+	ksreview = "!sh -c 'SHA=${1:-HEAD}; BRANCH=${2:-master}; if [ $SHA == $BRANCH ] ; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA;' -"
+	ksshow = "!sh -c 'SHA=${1:-HEAD}; git difftool -y -t Kaleidoscope $SHA^..$SHA;' -"
+	ksdiff = difftool -y -t Kaleidoscope
+	s = status
+	br = branch
+	ci = commit
+	co = checkout
+	df = diff
+	g = grep -I
+	lg = log -p
+	pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
+	rb = rbranch
+	rv = review
+	st = status
+	amend = commit --amend
+	rank = shortlog -sn --no-merges
+	whatis = show -s --pretty='format:%h (%s, %ad)' --date=short
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+	insteadOf = "github:"
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+[url "git@heroku.com:"]
+	insteadOf = "heroku:"
