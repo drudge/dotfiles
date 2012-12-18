@@ -1,20 +1,8 @@
-if [[ ! -e ~/.ssh/config ]]; then
-  touch ~/.ssh/config
-fi
-
-if [ "`grep "HashKnownHosts" ~/.ssh/config | wc -l`" = "       0" ]; then
-  echo "HashKnownHosts no" >> ~/.ssh/config
-fi
-
-if [[ ! -e ~/.ssh/known_hosts ]]; then
-  touch ~/.ssh/known_hosts
-fi
-
 # Load npm_globals, add the default node into the path.
 source ~/.dotfiles/source/50_devel.sh
 
 # Install Node.js.
- if [[ "$(type -P nave)" ]]; then
+ if [[ -x `which nave` ]]; then
   nave_stable="$(nave stable)"
   if [[ "$(node --version 2>/dev/null)" != "v$nave_stable" ]]; then
     e_header "Installing Node.js $nave_stable"
@@ -31,14 +19,14 @@ fi
 source ~/.dotfiles/source/50_devel.sh
 
 # Install Npm modules.
-if [[ "$(type -P npm)" ]]; then
-  e_header "Updating Npm"
+if [[ -x `which npm` ]]; then
+  e_header "Updating npm"
   npm update -g npm
 
   { pushd "$(npm config get prefix)/lib/node_modules"; installed=(*); popd; } > /dev/null
   list="$(to_install "${npm_globals[*]}" "${installed[*]}")"
   if [[ "$list" ]]; then
-    e_header "Installing Npm modules: $list"
+    e_header "Installing npm modules: $list"
     npm install -g $list
   fi
 fi
