@@ -22,7 +22,7 @@ export GIT_AUTHOR_EMAIL=$EMAIL
 #export PATH="/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # From http://stackoverflow.com/questions/370047/#370255
-if [ test -n "${ZSH_VERSION}" ]; then
+if [[ "${ZSH_VERSION}" != "" ]]; then
 function path_remove() {
   IFS=:
   # convert it to an array
