@@ -1,6 +1,6 @@
 # Editing
 
-if [[ ! "$SSH_TTY" && "$OSTYPE" =~ ^darwin ]]; then
+if [[ ! -z "$SSH_TTY" && "$OSTYPE" =~ "^darwin" ]]; then
   export EDITOR='choc -w'
   export LESSEDIT='choc %f'
   alias q='choc'

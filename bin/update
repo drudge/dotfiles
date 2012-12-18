@@ -1,28 +1,5 @@
-function upgrade () {
-  if [ ! $1 ] ; then
-    print "local upgrade"
-    if [ `uname` = "Darwin" ]; then
-      osx_upgrade_local
-    elif [ `uname -o` = "GNU/Linux" ]; then
-      debian_upgrade_local
-    else
-      print "I don't know what can I do for this type of machine"
-    fi
-  elif [[ $1 = "help" || $1 = "--help" || $1 = "-h" ]] ; then
-    print "local usage for upgrading Mac OS X or debian systems including fink and darwin ports: upgrade and 
-clean"
-    print 'remote usage: upgrade $debian_server'
-  elif [ $1 ]; then
-    print "remote upgrade"
-    if [[ `ssh $SHORTNAME@$1 uname -o 2&>/dev/null` = "GNU/Linux" ]] ; then
-      debian_upgrade_remote $1
-    elif [[ `ssh $1 uname 2&>/dev/null` = "Darwin" ]] ; then
-      osx_upgrade_remote $1
-    else
-      print "$1 is not a debian based Linux nor a Mac OS X machine. No upgrade could be completed."
-    fi
-  fi
-}
+#!/bin/sh
+
 # osx local upgrade 
 function osx_upgrade_local () {
   print "Performing software update..."
@@ -106,3 +83,27 @@ function debian_upgrade_remote (){
     fi
   fi
 }
+
+if [ ! $1 ] ; then
+    print "local upgrade"
+    if [ `uname` = "Darwin" ]; then
+      osx_upgrade_local
+    elif [ `uname -o` = "GNU/Linux" ]; then
+      debian_upgrade_local
+    else
+      print "I don't know what can I do for this type of machine"
+    fi
+  elif [[ $1 = "help" || $1 = "--help" || $1 = "-h" ]] ; then
+    print "local usage for upgrading Mac OS X or debian systems including fink and darwin ports: upgrade and 
+clean"
+    print 'remote usage: upgrade $debian_server'
+  elif [ $1 ]; then
+    print "remote upgrade"
+    if [[ `ssh $1 uname -o 2&>/dev/null` = "GNU/Linux" ]] ; then
+      debian_upgrade_remote $1
+    elif [[ `ssh $1 uname 2&>/dev/null` = "Darwin" ]] ; then
+      osx_upgrade_remote $1
+    else
+      print "$1 is not a debian based Linux nor a Mac OS X machine. No upgrade could be completed."
+    fi
+  fi

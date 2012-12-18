@@ -1,4 +1,4 @@
-source $HOME/.dotfiles/bin/is-true
+source $HOME/.dotfiles/conf/zsh/functions/is-true
 
 precmd() {
   ## Git info in the prompt

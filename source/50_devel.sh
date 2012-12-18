@@ -1,11 +1,11 @@
 export PATH
 
 # nave init.
-if [[ "$(type -P nave)" ]]; then
+if [ -x `which nave` ]; then
   nave_default="$(nave ls | awk '/^default/ {print $2}')"
-  if [[ "$nave_default" && "$(node --version 2>/dev/null)" != "v$nave_default" ]]; then
+  if [[ -w "$nave_default" && "$(node --version 2>/dev/null)" != "v$nave_default" ]]; then
     node_path=~/.nave/installed/$nave_default/bin
-    if [[ -d "$node_path" ]]; then
+    if [ -d "$node_path" ]; then
       PATH=$node_path:$(path_remove ~/.nave/installed/*/bin)
     fi
   fi
@@ -17,7 +17,7 @@ npm_globals=(jake)
 alias nave_stable='nave use default stable nave_stable_2 $(node --version 2>/dev/null); src'
 function nave_stable_2() {
   npm update -g npm
-  if [[ "$1" != "$(node --version 2>/dev/null)" ]]; then
+  if [ "$1" != "$(node --version 2>/dev/null)" ]; then
     echo "Node.js version updated to $1, installing Npm global modules."
     npm install -g ${npm_globals[*]}
   else

@@ -8,10 +8,6 @@ setopt autopushd pushdminus extendedglob rcquotes mailwarning
 
 unsetopt promptcr bgnice autoparamslash 
 
-# Check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
 export GREP_OPTIONS='--color=auto'
 
 # Prevent less from clearing the screen while still showing colors.

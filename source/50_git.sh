@@ -55,7 +55,7 @@ function gra() {
 # git log with per-commit cmd-clickable GitHub URLs (iTerm)
 function gf() {
   local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
-  [[ "$remote" ]] || return
+  [[ -z "$remote" ]] || return
   local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
   git log $* --name-status --color | awk "$(cat <<AWK
     /^.*commit [0-9a-f]{40}/ {sha=substr(\$2,1,7)}
@@ -69,11 +69,11 @@ AWK
 for n in {1..5}; do alias gf$n="gf -n $n"; done
 
 # OSX-specific Git shortcuts
-if [[ "$OSTYPE" =~ ^darwin ]]; then
+if [[ "$OSTYPE" =~ "^darwin" ]]; then
   alias gdk='git ksdiff'
   alias gdkc='gdk --cached'
   alias gt='gittower -s'
-  if [[ ! "$SSH_TTY" ]]; then
+  if [[ ! -z "$SSH_TTY" ]]; then
     alias gd='gdk'
   fi
 fi

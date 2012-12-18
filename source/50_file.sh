@@ -10,7 +10,7 @@ limit core 0 # No coredumps.
 limit -s
 
 # Always use color output for `ls`
-if [[ "$OSTYPE" =~ ^darwin ]]; then
+if [[ "$OSTYPE" =~ "^darwin" ]]; then
   alias ls="ls -G"
 else
   alias ls="ls --color=always"
@@ -21,7 +21,7 @@ export COLOR_PROMPT=yes
 export force_colored_prompt=yes
 
 # Directory listing
-if [[ "$(type -P tree)" ]]; then
+if [[ -x `which tree` ]]; then
   alias ll='tree --dirsfirst -aLpughDFiC 1'
   alias lsd='ll -d'
 else
