@@ -57,7 +57,7 @@ for d in "$@"; do
 done
 
 # If -- wasn't specified, default to all subdirs of the current dir.
-[[ "$dashes" ]] || dirs=(*/)
+[[ -z "$dashes" ]] || dirs=(*/)
 
 local nops=()
 # Do stuff for each specified dir, in each dir. Non-dirs are ignored.
@@ -68,7 +68,7 @@ for d in "${dirs[@]}"; do
   [[ "$d" != "/" ]] && d="${d%/}"
   # Execute the command, grabbing all stdout and stderr.
   output="$( (cd "$d"; eval "$@") 2>&1 )"
-  if [[ "$output" ]]; then
+  if [[ -z "$output" ]]; then
     # If the command had output, display a header and that output.
     echo -e "${h1}${d}${h2}\n$output\n"
   else

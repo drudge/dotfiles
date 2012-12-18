@@ -8,6 +8,7 @@ if [[ -f $1 ]]; then
     *.tar.gz)      gunzip -c $1 | tar -tf - -- ;;
     *.tar)         tar -tf $1 ;;
     *.tgz)         tar -ztf $1 ;;
+    *.tbz)         tar -ztf $1 ;;
     *.zip)         unzip -l $1 ;;
     *.bz2)         bzless $1 ;;
     *)             echo "'$1' Error. Please go away" ;;

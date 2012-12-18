@@ -1,6 +1,7 @@
 # OSX-only stuff. Abort if not OSX.
 [[ "$OSTYPE" =~ ^darwin ]] || return 1
 
+export PATH
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 

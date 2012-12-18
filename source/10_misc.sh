@@ -19,7 +19,25 @@ export GIT_COMMITTER_EMAIL=$EMAIL
 export GIT_AUTHOR_NAME=$FULL_NAME
 export GIT_AUTHOR_EMAIL=$EMAIL
 
-export PATH="/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+#export PATH="/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+# From http://stackoverflow.com/questions/370047/#370255
+function path_remove() {
+  IFS=:
+  # convert it to an array
+  t=("${(s/:/)PATH}")
+  unset IFS
+  # perform any array operations to remove elements from the array
+  t=(${t[@]%%$1})
+  IFS=:
+  # output the new array
+  echo "${t[*]}"
+}
+
+
+PATH=/opt/local/bin:$(path_remove /opt/local/bin)
+PATH=/usr/local/bin:$(path_remove /usr/local/bin)
+PATH=~/.dotfiles/bin:$(path_remove ~/.dotfiles/bin)
 
 # shortcut to get root
 alias up="sudo $SHELL"

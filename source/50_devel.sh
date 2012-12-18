@@ -6,8 +6,7 @@ if [ -x `which nave` ]; then
   if [[ -w "$nave_default" && "$(node --version 2>/dev/null)" != "v$nave_default" ]]; then
     node_path=~/.nave/installed/$nave_default/bin
     if [ -d "$node_path" ]; then
-      echo ~/.nave/installed/$nave_default/bin
-      PATH=$node_path:$PATH
+      PATH=$node_path:$(path_remove ~/.nave/installed/*/bin)
     fi
   fi
 fi
@@ -15,14 +14,10 @@ fi
 npm_globals=(jake json)
 
 # Fetch and build the latest stable Node.js, assigning it the alias "default"
-function nave_stable() {
-  nave use default stable
-  nave_stable_2 $(node --version 2>/dev/null)
-  src
-}
+alias nave_stable='nave use default stable nave_stable_2 $(node --version 2>/dev/null); src'
 function nave_stable_2() {
   npm update -g npm
-  if [ "$1" != "$(node --version 2>/dev/null)" ]; then
+  if [[ "$1" != "$(node --version 2>/dev/null)" ]]; then
     echo "Node.js version updated to $1, installing Npm global modules."
     npm install -g ${npm_globals[*]}
   else
@@ -30,4 +25,5 @@ function nave_stable_2() {
   fi
 }
 
-PATH=.bin:./node_modules/.bin:$PATH
+PATH=./node_modules/.bin:$(path_remove ./node_modules/.bin)
+PATH=./.bin:$(path_remove ./.bin)

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage: simple-compress <file> (<type>)
-# Description: compresses files or a directory.  Defaults to tar.gz
+# Description: compresses files or a directory.  Defaults to zip
 
 if [ "$2" ]; then
   case "$2" in
@@ -14,5 +14,5 @@ if [ "$2" ]; then
     *) echo "Error: $2 is not a valid compression type";;
   esac
 else
-  simple-compress "$1" tar.gz
+  simple-compress "$1" zip
 fi

@@ -1,5 +1,3 @@
-PATH=~/.dotfiles/bin:$PATH
-export PATH
 
 # Source all files in ~/.dotfiles/source/
 function src() {

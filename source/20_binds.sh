@@ -10,7 +10,7 @@ zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 
 if [ -z "$VIMRUNTIME" ]; then
-  zmodload -ap zsh/mapfile mapfile
+  zmodload -ap zsh/mapfile mapfile &>/dev/null
 fi
 
 ## THIS REQUIRES OPTION AS META IN TERMINAL.APP :(
