@@ -1,4 +1,4 @@
 
-if [[ ! "$SHELL" =~ zsh$ ]]; then
+if [[ "$ZSH_VERSION" == ""$ ]]; then
   chsh -s `which zsh`
 fi

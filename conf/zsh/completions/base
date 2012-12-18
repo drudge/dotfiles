@@ -110,7 +110,8 @@ knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
 zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
 
 # Host completion (code by bkhl)
-if [[ -f ~/.ssh/known_hosts ]]; then
+
+if [[ -e ~/.ssh/known_hosts ]]; then
    _etchosts=(${(s: :)${(ps:\t:)${${(f)"$(</etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}})
    _sshhosts=(${${${${(f)"$(<~/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*})
    _myhosts=($_etchosts $_sshhosts)

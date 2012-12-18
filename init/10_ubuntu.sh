@@ -10,6 +10,7 @@ sudoers_src=~/.dotfiles/conf/ubuntu/$sudoers_file
 sudoers_dest="/etc/sudoers.d/$sudoers_file"
 if [[ ! -e "$sudoers_dest" || "$sudoers_dest" -ot "$sudoers_src" ]]; then
   cat <<EOF
+
 The sudoers file can be updated to allow certain commands to be executed
 without needing to use sudo. This is potentially dangerous and should only
 be attempted if you are logged in as root in another shell.
