@@ -23,26 +23,13 @@ exit; fi
 script="$(basename "$0")"
 bin="${script#curl}"
 
-cache_dir=~/.dotfiles/caches/"$script"
-
 # Create tempfile.
 tmp="$(mktemp "/tmp/$script.XXXXX")"
 # Curl (using all specified options) to tempfile, storing url for later.
 echo -e 'Fetching file...\n'
-url="$(curl "$@" -o "$tmp" -w '%{url_effective}')"
-# Remove leading http:// or https:// from url, and add index.html at the end if
-# filename can't be determined.
-path="$(echo "$url" | perl -pe's#^https?://##i;s#/$|(^[^/\s]+|/[^/.\s]+)$#$1/index.html#')"
-
-dir="$cache_dir/$(dirname "$path")"
-file="$dir/$(basename "$path")"
-
-# Create directory if it doesn't exist.
-[ -e "$dir" ] || mkdir -p "$dir"
-
-# Copy tempfile to final file.
-mv "$tmp" "$file"
+url="$(cd /tmp && curl "$@" -O -w '%{url_effective}')"
+file="/tmp/$(basename "$url")"
 
 # Open file in editor!
-echo -e "\nOpening ~${file#$HOME}"
+echo -e "\nOpening $file"
 "$bin" "$file"
