@@ -6,7 +6,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Enable caching
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+zstyle ':completion::complete:*' cache-path ~/.dotfiles/caches/zsh/$HOST
 
 # Process completion
 #zstyle ':completion:*:*:kill:*' menu yes select
@@ -21,7 +21,7 @@ zstyle ':completion:*:processes-names' command 'ps -e -o comm='
 zstyle ':completion:*' completer _oldlist _expand _force_rehash _complete
 
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+zstyle ':completion::complete:*' cache-path ~/.dotfiles/caches/zsh/$HOST
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
@@ -117,5 +117,5 @@ if [[ -f ~/.ssh/known_hosts ]]; then
    zstyle ':completion:*' hosts $_myhosts
 fi
 
-fpath=(~/.zsh/completions $fpath)
-source ~/.zsh/completions/_npm
+fpath=(~/.dotfiles/conf/zsh/completions $fpath)
+source ~/.dotfiles/conf/zsh/completions/_npm
