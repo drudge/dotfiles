@@ -60,7 +60,7 @@ if (( ${#list[@]} > 0 )); then
 fi
 
 # Install Git Extras
-if [[ ! "$(type -P git-extras)" ]]; then
+if [[ ! -x "`which git-extras`" ]]; then
   e_header "Installing Git Extras"
   (
     cd ~/.dotfiles/libs/git-extras &&
