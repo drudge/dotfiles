@@ -2,7 +2,7 @@
 	autocrlf = input
 	quotepath = false
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
-	excludesfile = /Users/drudge/.gitignore
+	excludesfile = /Users/drudge/.dotfiles/conf/.gitignore_global
 [log]
 	decorate = full
 [color]

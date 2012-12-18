@@ -32,3 +32,6 @@ bindkey '^[[3~' delete-char
 bindkey "^Xt" tetris ## C-x-t to play
 
 bindkey '\e' undo
+
+# Load completions
+source $HOME/.dotfiles/conf/zsh/completions/base
