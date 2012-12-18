@@ -1,6 +1,6 @@
 # Invoke this every time when u change .zshrc to
 # recompile it.
-src ()
+zshsrc ()
 {
   autoload -U zrecompile
   [ -f ~/.zshrc ] && zrecompile -p ~/.zshrc

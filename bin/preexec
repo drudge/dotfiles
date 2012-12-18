@@ -1,4 +1,4 @@
-source $HOME/.zsh/functions/title
+source $HOME/.dotfiles/bin/title
 
 function preexec() {
   title "" "%m: %35<...<%~"
