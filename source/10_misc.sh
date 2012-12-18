@@ -22,6 +22,7 @@ export GIT_AUTHOR_EMAIL=$EMAIL
 #export PATH="/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # From http://stackoverflow.com/questions/370047/#370255
+if [ test -n "${ZSH_VERSION}" ]; then
 function path_remove() {
   IFS=:
   # convert it to an array
@@ -33,6 +34,19 @@ function path_remove() {
   # output the new array
   echo "${t[*]}"
 }
+else
+  function path_remove() {
+    IFS=:
+    # convert it to an array
+    t=($PATH)
+    unset IFS
+    # perform any array operations to remove elements from the array
+    t=(${t[@]%%$1})
+    IFS=:
+    # output the new array
+    echo "${t[*]}"
+  }
+fi
 
 
 PATH=/opt/local/bin:$(path_remove /opt/local/bin)
