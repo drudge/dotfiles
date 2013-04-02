@@ -43,6 +43,7 @@ packages=(
   tree sl id3tool
   nmap telnet
   htop
+  zsh
 )
 
 list=()
