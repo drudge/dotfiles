@@ -52,6 +52,6 @@ fi
 PATH=/opt/local/bin:$(path_remove /opt/local/bin)
 PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=~/.dotfiles/bin:$(path_remove ~/.dotfiles/bin)
-PATH=~/Development/adt-bundle-mac-x86_64/sdk/platform-tools:$(path_remove ~/Development/adt-bundle-mac-x86_64/sdk/platform-tools)
+
 # shortcut to get root
 alias up="sudo $SHELL"
