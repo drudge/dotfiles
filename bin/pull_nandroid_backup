@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+
+var exec = require('child_process').exec;
+var fs = require('fs');
+var path = require('path');
+var exists = fs.existsSync || path.existsSync;
+
+var BACKUPS_PATH = '/data/media/clockworkmod/backup';
+var ADB_PATH = which('adb');
+
+if (!ADB_PATH) {
+  console.error('fatal: adb not found!');
+  process.exit(1);
+}
+
+exec(ADB_PATH + ' shell ls ' + BACKUPS_PATH, function (error, stdout) {
+    if (error !== null) {
+      console.log('exec error: ' + error);
+      return;
+    }
+    
+    var backups = stdout.trim().split('\r\n').sort().reverse();
+    
+    if (backups.length) {
+      var latestBackup = backups[0];
+      
+      console.log('fetching backup from ' + latestBackup + '...');
+      
+      var fullBackupPath = path.join(BACKUPS_PATH, latestBackup);
+      
+      exec(ADB_PATH + ' shell ls ' + fullBackupPath, function (error, stdout) {
+        if (error !== null) {
+          console.log('exec error: ' + error);
+          return;
+        }
+        var files = stdout.trim().split('\r\n').sort();
+        
+        asyncLoop(files, function(file, next) {
+          var fullFilePath = path.join(fullBackupPath, file);
+          process.stdout.write('    ' + file + '...');
+          exec(ADB_PATH + ' pull ' + fullFilePath, function (error, stdout, stderr) {
+              if (error !== null) {
+                console.log('exec error: ' + error);
+                return next();
+              }
+              
+              stdout = stdout.trim();
+              stderr = stderr.trim();
+              
+              if (stderr) process.stdout.write(' ' + stderr + '\n');
+              if (stdout) process.stdout.write(' ' + stdout + '\n');
+              
+              if (!stderr && !stdout) process.stdout.write('\n');
+              
+              next();
+          });
+        }, function() {
+          console.log('fetch complete');
+        });
+      });
+    }
+});
+
+function which(name) {
+  var paths = process.env.PATH.split(':');
+  var loc;
+
+  for (var i = 0, len = paths.length; i < len; ++i) {
+    loc = path.join(paths[i], name);
+    if (exists(loc)) return loc;
+  }
+}
+
+function asyncLoop(collection, iteration, complete) {
+  var item = collection.shift();
+  var self = this;
+  
+  if (item) {
+    iteration.call(this, item, function() {
+      asyncLoop.call(self, collection, iteration, complete);
+    });
+  } else if (typeof complete === 'function') {
+    complete.call(this);
+  }
+}
