@@ -5,6 +5,9 @@
 PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 export PATH
 
+e_header "Applying Preferences"
+$HOME/.dotfiles/conf/osx_defaults.sh
+
 # Some tools look for XCode, even though they don't need it.
 # https://github.com/joyent/node/issues/3681
 # https://github.com/mxcl/homebrew/issues/10245
