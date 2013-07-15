@@ -192,6 +192,7 @@ settings = {
     real_name = "Nicholas Penree";
     user_name = "drudge";
     nick = "drudge";
+    timestamp_format = "%I:%M:%S";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   proxy = {
