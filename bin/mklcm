@@ -1,0 +1,91 @@
+#!/bin/sh
+
+if [ "$1" = "" ]; then
+  echo ""
+  echo "usage: `basename $0` <project name>"
+  echo ""
+  exit 1
+fi
+
+if [ "$MY_CODE_LOCATION" = "" ]; then
+  MY_CODE_LOCATION=~/Code
+fi
+
+appPath="$MY_CODE_LOCATION/$1"
+tempPath="${TMPDIR}${1}.${RANDOM}"
+
+echo ""
+echo "  creating project directory..." && \
+mkdir -p "$appPath" && cd "$appPath" && \
+echo "  bootstrapping lcm..." && \
+npm install locomotive  &> /dev/null && \
+echo "  creating app structure..." && \
+"$appPath/node_modules/.bin/lcm" create "$tempPath" &> /dev/null && \
+mv -f $tempPath/* $appPath &> /dev/null && \
+rm -rf "$tempPath" && \
+touch README.md && \
+mkdir lib && \
+mkdir log && \
+echo ".DS_Store" > .gitignore && \
+echo "node_modules/" >> .gitignore && \
+echo "log/" >> .gitignore && \
+cat << 'EOF' > server.js
+/**
+ * Module dependencies.
+ */
+
+var locomotive = require('locomotive');
+var os = require('os');
+//var cluster = require('cluster');
+
+/**
+ * Environment.
+ */
+
+var env = process.env.APP_ENV || process.env.NODE_ENV || 'development';
+var port = process.env.PORT || 3000;
+
+/**
+ * Boot the application.
+ */
+
+locomotive.boot(__dirname, env, function(err, server) {
+  if (err) {
+    throw err;
+  }
+
+  // Optional:
+  //
+  //   Use the `cluster` module to spawn 1 worker per core
+  //   when in production mode and respawn them if they quit.
+  //
+  //if (cluster.isMaster && env !== 'development') {
+  //  for (var i = 0, numCPUs = os.cpus().length; i < numCPUs; i++) {
+  //    var worker = cluster.fork();
+  //  }
+  //
+  //  cluster.on('exit', function(worker, code, signal) {
+  //    cluster.fork();
+  //  });
+  //} else {
+    server.listen(port, function() {
+      console.log('listening on http://127.0.0.1:' + port + ' (pid ' + process.pid + ')');
+    });
+  //}
+});
+EOF
+cat << 'EOF' > .tern-project
+{
+  "libs": ["ecma5"],
+  "plugins": {
+    "node": {}
+  }
+}
+EOF
+
+echo "  installing npm dependencies..." && \
+npm install &> /dev/null && \
+npm install async debug &> /dev/null && \
+echo "  launcing editor..." && \
+echo "" && \
+$EDITOR "$appPath"
