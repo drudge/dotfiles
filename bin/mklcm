@@ -35,7 +35,7 @@ cat << 'EOF' > server.js
  */
 
 var locomotive = require('locomotive');
-var os = require('os');
+//var os = require('os');
 //var cluster = require('cluster');
 
 /**
@@ -59,19 +59,22 @@ locomotive.boot(__dirname, env, function(err, server) {
   //   Use the `cluster` module to spawn 1 worker per core
   //   when in production mode and respawn them if they quit.
   //
-  //if (cluster.isMaster && env !== 'development') {
-  //  for (var i = 0, numCPUs = os.cpus().length; i < numCPUs; i++) {
-  //    var worker = cluster.fork();
-  //  }
+  // if (cluster.isMaster && env !== 'development') {
+  //   for (var i = 0, numCPUs = os.cpus().length; i < numCPUs; i++) {
+  //     cluster.fork();
+  //   }
   //
-  //  cluster.on('exit', function(worker, code, signal) {
-  //    cluster.fork();
+  //   cluster.on('exit', function() {
+  //     cluster.fork();
+  //   });
+  // } else {
+  //  server.listen(port, function() {
+  //    console.log('listening on http://127.0.0.1:' + port + ' (pid ' + process.pid + ')');
   //  });
-  //} else {
-    server.listen(port, function() {
-      console.log('listening on http://127.0.0.1:' + port + ' (pid ' + process.pid + ')');
-    });
   //}
+  server.listen(port, function() {
+    console.log('listening on http://127.0.0.1:' + port + ' (pid ' + process.pid + ')');
+  });
 });
 EOF
 cat << 'EOF' > .tern-project
