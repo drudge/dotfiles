@@ -25,5 +25,7 @@ function nave_stable_2() {
   fi
 }
 
+alias jake="noglob jake"
+
 PATH=./node_modules/.bin:$(path_remove ./node_modules/.bin)
 PATH=./.bin:$(path_remove ./.bin)
