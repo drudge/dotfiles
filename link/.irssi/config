@@ -135,7 +135,7 @@ statusbar = {
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
-        act = { priority = "10"; };
+        chanact = { };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -204,7 +204,16 @@ settings = {
     autolog_level = "ALL -CRAP -CLIENTCRAP -CTCPS";
     autolog_path = "~/.irssi/logs/%Y/$tag/$0.%m-%d.log";
   };
-  "perl/core/scripts" = { proxy_logging = "0"; };
+  "perl/core/scripts" = {
+    proxy_logging = "0";
+    weather_location = "12020";
+    chanact_abbreviate_names = "0";
+    chanact_filter = "0";
+    chanact_chop_status = "yes";
+    chanact_separator = " ";
+    chanact_filter_windowlist_level = "2";
+    chanact_filter_windowlist = "@QUERIES (status),1";
+  };
 };
 ignores = (
   {
@@ -213,3 +222,48 @@ ignores = (
   }
 );
 logs = { };
+windows = {
+  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  2 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#voidptr";
+        tag = "freenode";
+      }
+    );
+  };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#chocolat";
+        tag = "freenode";
+      }
+    );
+  };
+  4 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#node.js";
+        tag = "freenode";
+      }
+    );
+  };
+  5 = {
+    items = (
+      {
+        type = "QUERY";
+        chat_type = "IRC";
+        name = "dcope";
+        tag = "freenode";
+      }
+    );
+  };
+};
+mainwindows = { 1 = { first_line = "1"; lines = "23"; }; };
+hilights = ( { text = "drudge"; nick = "yes"; word = "yes"; } );
