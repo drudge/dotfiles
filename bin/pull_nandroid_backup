@@ -13,7 +13,7 @@ if (!ADB_PATH) {
   process.exit(1);
 }
 
-exec(ADB_PATH + ' shell ls ' + BACKUPS_PATH, function (error, stdout) {
+exec('"' + ADB_PATH + '"' + ' shell ls ' + BACKUPS_PATH, function (error, stdout) {
     if (error !== null) {
       console.log('exec error: ' + error);
       return;
@@ -28,7 +28,7 @@ exec(ADB_PATH + ' shell ls ' + BACKUPS_PATH, function (error, stdout) {
       
       var fullBackupPath = path.join(BACKUPS_PATH, latestBackup);
       
-      exec(ADB_PATH + ' shell ls ' + fullBackupPath, function (error, stdout) {
+      exec('"' + ADB_PATH + '"' + ' shell ls ' + fullBackupPath, function (error, stdout) {
         if (error !== null) {
           console.log('exec error: ' + error);
           return;
@@ -38,7 +38,7 @@ exec(ADB_PATH + ' shell ls ' + BACKUPS_PATH, function (error, stdout) {
         asyncLoop(files, function(file, next) {
           var fullFilePath = path.join(fullBackupPath, file);
           process.stdout.write('    ' + file + '...');
-          exec(ADB_PATH + ' pull ' + fullFilePath, function (error, stdout, stderr) {
+          exec('"' + ADB_PATH + '"' + ' pull ' + fullFilePath, function (error, stdout, stderr) {
               if (error !== null) {
                 console.log('exec error: ' + error);
                 return next();
