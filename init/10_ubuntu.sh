@@ -33,6 +33,8 @@ fi
 
 # Update APT.
 e_header "Updating APT"
+echo "deb http://ppa.launchpad.net/keithw/mosh/ubuntu precise main" > /etc/apt/sources.list.d/mosh.list;
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7BF6DFCD;
 sudo apt-get -qq update
 sudo apt-get -qq upgrade
 
@@ -44,6 +46,7 @@ packages=(
   nmap telnet
   htop
   zsh
+  mosh
 )
 
 list=()

@@ -19,6 +19,8 @@ export GIT_COMMITTER_EMAIL=$EMAIL
 export GIT_AUTHOR_NAME=$FULL_NAME
 export GIT_AUTHOR_EMAIL=$EMAIL
 
+export MOSH_TITLE_NOPREFIX=1
+
 #export PATH="/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # From http://stackoverflow.com/questions/370047/#370255
@@ -55,4 +57,4 @@ PATH=~/.dotfiles/bin:$(path_remove ~/.dotfiles/bin)
 
 # shortcut to get root
 alias up="sudo $SHELL"
-alias irc="ssh irssi@irc.penree.com -p 8022"
+alias irc="mosh irc.penree.com"
