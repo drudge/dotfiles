@@ -58,4 +58,3 @@ PATH=~/.dotfiles/bin:$(path_remove ~/.dotfiles/bin)
 # shortcut to get root
 alias up="sudo $SHELL"
 alias irc="mosh irc.penree.com"
-alias ssh='~/.dotfiles/bin/ssh'

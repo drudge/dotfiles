@@ -1,10 +1,10 @@
 # Editing
 
 if [[ "$OSTYPE" =~ "^darwin" ]]; then
-  export VISUAL='choc -w'
-  export EDITOR='choc -w'
-  export LESSEDIT='choc %f'
-  alias q='choc'
+  export VISUAL="choc -w"
+  export EDITOR="choc -w"
+  export LESSEDIT="choc %f"
+  alias q="choc"
 else
   export EDITOR=$(type vi vim 2>/dev/null | sed 's/ .*$//;q')
   alias q="$EDITOR -w -z"

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+location=$(scselect 2>&1|grep ' \* ' | awk '{print $NF}' | sed 's/(//g;s/)//g')
+
+if [ -f ~/.ssh/config.d/$location.conf ] ; then
+  # WARNING: changes may be lost!  The symlink was safer in this regard.
+  rm ~/.ssh/config
+  
+  # The most specific config should come first
+  cp ~/.ssh/config.$location.conf ~/.ssh/config
+  
+  # Add the shared config, if it exists
+  if [ -f ~/.ssh/config.d/all.conf ]; then
+    # protect against no newline at EOF
+    echo >> ~/.ssh/config
+    cat ~/.ssh/config.d/all.conf >> ~/.ssh/config
+  fi
+else
+  # Add the shared config, if it exists
+  if [ -f ~/.ssh/config.d/all.conf ]; then
+    cp ~/.ssh/config.d/all.conf ~/.ssh/config
+  fi
+fi
