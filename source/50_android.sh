@@ -1,7 +1,8 @@
 
 if [[ "$OSTYPE" =~ "^darwin" ]]; then
-  JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
+  JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home"
   STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk
+  IDEA_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk
 
   if [ -e "/Applications/Android Studio.app/sdk" ]; then
     ANDROID_HOME="/Applications/Android Studio.app/sdk"

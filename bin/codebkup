@@ -1,0 +1,53 @@
+#!/bin/bash
+
+SOURCE="$HOME/Code"
+VOLUME="/Volumes/Code Backup"
+
+DISKUTIL=$(which diskutil)
+PLISTBUDDY="/usr/libexec/PlistBuddy"
+PV=$(which pv)
+PV_ARGS="--line-mode --eta --progress --timer --wait"
+RSYNC="/usr/local/bin/rsync"
+RSYNC_ARGS="--delete --archive"
+
+if ! test -x "$RSYNC"; then
+  echo "rsync not found! do you want to install it?\n\n  > brew tap homebrew/dupes && brew install rsync\n\n"
+  exit 1
+fi
+
+if ! test -x "$PV"; then
+  echo "pv not found! do you want to install it?\n\n  > brew install pv\n\n"
+  exit 1
+fi
+
+if ! test -x "$DISKUTIL"; then
+  echo "diskutil not found!"
+  exit 1
+fi
+
+if ! test -x "$PLISTBUDDY"; then
+  echo "PlistBuddy not found!"
+  exit 1
+fi
+
+DISK=`$PLISTBUDDY -c 'Print :DeviceIdentifier' /dev/stdin <<< $("$DISKUTIL" info -plist "$VOLUME")`
+
+"$DISKUTIL" mount $DISK || exit 1
+
+if mount | grep "$VOLUME" 2>&1 > /dev/null; then
+  echo "Starting backup up: $SOURCE -> $VOLUME..."
+  NUM_FILES=$("$RSYNC" --dry-run --stats $RSYNC_ARGS "$SOURCE"/* "$VOLUME"  | grep "^Number of files" | awk '{sub(",", "", $4);} END {print $4}')
+
+  if [ $NUM_FILES -eq 0 ]; then
+    echo "no files to backup!"
+    exit 1
+  fi
+
+  printf "Found %'.f file(s) to back up\n" $NUM_FILES
+  "$RSYNC" --verbose --human-readable $RSYNC_ARGS "$SOURCE"/* "$VOLUME" | "$PV" $PV_ARGS --size "$NUM_FILES"
+else
+  echo "error: $SOURCE could not be mounted"
+  exit 1
+fi
+
+"$DISKUTIL" unmountDisk "$VOLUME"

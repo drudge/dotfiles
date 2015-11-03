@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ ! -e ~/.twec_vpn ]; then
+  echo "~/.twec_vpn is missing, aborting!" && exit 1
+fi;
+
+source $HOME/.twec_vpn
+
+TWEC_USER=${TWEC_USER:-$USER}
+TWEC_URL=${TWEC_URL:-"https://vpn1.twec.com"}
+
+if [ ! -e $TWEC_P12_FILE ]; then
+  echo "$TWEC_P12_FILE does not exist!" && exit 1
+fi;
+
+if [ "$TWEC_PASSWORD" = "" ]; then
+  echo "Missing TWEC_PASSWORD in ~/.twec_vpn" && exit 1
+fi;
+
+echo "$TWEC_PASSWORD" | sudo openconnect \
+  --timestamp \
+  --disable-ipv6 \
+  --user=$TWEC_USER \
+  --passwd-on-stdin \
+  --certificate=$TWEC_P12_FILE \
+  --key-password=$TWEC_P12_KEY \
+  --cert-expire-warning=14 \
+  $TWEC_URL

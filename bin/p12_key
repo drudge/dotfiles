@@ -1,0 +1,11 @@
+#!/bin/bash
+
+in="$1"
+out="$2"
+
+if [ -f "$1" ]; then
+  openssl pkcs12 -in $in -nocerts -out "$in.key" && openssl rsa -in "$in.key" -out $out
+else
+  echo "usage: p12_key <in_file> <out_file>"
+  exit 1
+fi

@@ -25,17 +25,15 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Updating Homebrew"
   brew update
 
+  # needed for updated rsync
+  brew tap homebrew/dupes
+
   # Install Homebrew recipes.
-  recipes=(git tree sl lesspipe id3tool nmap git-extras htop-osx man2html the_silver_searcher mosh)
+  recipes=(git tree sl lesspipe id3tool nmap git-extras htop-osx rsync pv man2html the_silver_searcher mosh docker)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
     e_header "Installing Homebrew recipes: $list"
     brew install $list
-  fi
-
-  if [[ ! "$(type -P gcc-4.2)" ]]; then
-    e_header "Installing Homebrew dupe recipe: apple-gcc42"
-    brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
   fi
 fi

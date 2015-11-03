@@ -8,3 +8,10 @@ alias c="tr -d '\n' | pbcopy"
 alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
+
+mkdock () {
+  local name=$1
+  docker-machine create --driver vmwarefusion $name --vmwarefusion-memory-size 2048 && eval "$(docker-machine env $name)"
+}
+
+#docker-machine start dev-fusion && eval "$(docker-machine env dev-fusion)"
