@@ -21,3 +21,10 @@ export ANDROID_HOME
 
 PATH=$ANDROID_HOME/tools:$(path_remove $ANDROID_HOME/tools)
 PATH=$ANDROID_HOME/platform-tools:$(path_remove $ANDROID_HOME/platform-tools)
+
+if [[ "$(uname -o 2> /dev/null)" =~ "Android" ]]; then
+  alias update="apt update"
+  alias install="apt install"
+  alias remove="apt remove"
+  alias search="apt-cache search"
+fi
