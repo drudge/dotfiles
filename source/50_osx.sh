@@ -15,8 +15,6 @@ local DOCKER_VM_DRIVER="vmwarefusion"
 local DOCKER_VM_EXISTS="$(docker-machine inspect $DOCKER_VM_NAME 2>/dev/null)"
 
 if [[ $DOCKER_VM_EXISTS != "" ]]; then
-  # docker-machine create --driver $DOCKER_VM_DRIVER $DOCKER_VM_NAME
-
   if [[ "$(docker-machine status $DOCKER_VM_NAME)" != "Running" ]]; then
     docker-machine start $DOCKER_VM_NAME && eval "$(docker-machine env $DOCKER_VM_NAME)"
   else
