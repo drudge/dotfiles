@@ -53,6 +53,16 @@ sudo apt-get -qq update && sudo apt-get -qq upgrade && sudo apt-get -qq install 
 bash -c "$(curl -fsSL https://raw.github.com/drudge/dotfiles/master/bin/dotfiles)" && source ~/.zshrc
 ```
 
+### Android
+Notes:
+
+* Install [Termux](https://termux.com), a great terminal emulator and Linux environment for Android that doesn't require root.
+
+```sh
+apt update && apt install curl && echo &&
+bash -c "$(curl -fsSL https://raw.github.com/drudge/dotfiles/master/bin/dotfiles)"
+```
+
 ## The "init" step
 These things will be installed, but _only_ if they aren't already.
 
@@ -104,18 +114,18 @@ In addition to the aforementioned [dotfiles][dotfiles] script, there are a few o
 * Look through the [bin][bin] subdirectory for a few more.
 
 ## Inspiration
-<https://github.com/cowboy/dotfiles> 
-<https://github.com/gf3/dotfiles>  
+<https://github.com/cowboy/dotfiles>
+<https://github.com/gf3/dotfiles>
 <https://github.com/mathiasbynens/dotfiles>
 
 ## License
 Copyright (c) 2012 Nicholas Penree
-Licensed under the MIT license.  
+Licensed under the MIT license.
 <http://benalman.com/about/license/>
 
-Original Work:  
-Copyright (c) 2012 "Cowboy" Ben Alman  
-Licensed under the MIT license.  
+Original Work:
+Copyright (c) 2012 "Cowboy" Ben Alman
+Licensed under the MIT license.
 <http://benalman.com/about/license/>
 
 ## Useful
