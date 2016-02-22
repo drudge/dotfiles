@@ -8,7 +8,7 @@ if [ $# -eq 2 ]; then
   if [ ! -r $KEY ]
   then
     echo "'$KEY' does not exist or is not readable"
-    return 1
+    exit 1
   fi
   SERVER=$2
 else
@@ -18,7 +18,7 @@ else
     KEY=$RSAKEY
   else
     echo "No RSA or DSA key found"
-    return 1
+    exit 1
   fi
   SERVER=$1
 fi
@@ -26,7 +26,7 @@ fi
 if [ $# -lt 1 -o "$1" = "-h" ]; then
   echo Syntax:
   echo "$0 [publickey] [user@]<remotehost>"
-  return 1
+  exit 1
 fi
 
 # testing above
@@ -40,8 +40,8 @@ cat $KEY | \
 
 if [ $? -eq 0 ]; then
     echo "Public key installed on $SERVER"
-    return 0
+    exit 0
 else
     echo "Sorry, an error occurred!"
-    return 1
+    exit 1
 fi
