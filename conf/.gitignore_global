@@ -19,6 +19,7 @@
 *.bzip
 *.xz
 *.lzma
+*.tgz
 
 #packing-only formats
 *.iso
@@ -50,7 +51,7 @@
 .Trashes
 
 # Windows image file caches
-Thumbs.db 
+Thumbs.db
 
 # Folder config file
 Desktop.ini
