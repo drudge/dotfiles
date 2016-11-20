@@ -13,17 +13,17 @@ if [ -z "$VIMRUNTIME" ]; then
   zmodload -ap zsh/mapfile mapfile &>/dev/null
 fi
 
-## THIS REQUIRES OPTION AS META IN TERMINAL.APP :(
-bindkey '\e\e[D' backward-word
-bindkey '\e[3D' backward-word
-bindkey '\e\e[C' forward-word
-bindkey '\e[3C' forward-word
+# ## THIS REQUIRES OPTION AS META IN TERMINAL.APP :(
+# bindkey '\e\e[D' backward-word
+# bindkey '\e[3D' backward-word
+# bindkey '\e\e[C' forward-word
+# bindkey '\e[3C' forward-word
 
-bindkey '\e[H' beginning-of-line # home
-bindkey '\e[F' end-of-line # end
+# bindkey '\e[H' beginning-of-line # home
+# bindkey '\e[F' end-of-line # end
 
-bindkey '^[[5D' beginning-of-line # ctl-left, osx
-bindkey '^[[5C' end-of-line # ctl-right, osx
+# bindkey '^[[5D' beginning-of-line # ctl-left, osx
+# bindkey '^[[5C' end-of-line # ctl-right, osx
 
 # fix mac backspace/delete keybindings
 bindkey '^?' backward-delete-char
