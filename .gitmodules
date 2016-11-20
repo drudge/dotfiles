@@ -7,3 +7,6 @@
 [submodule "libs/nave"]
 	path = libs/nave
 	url = git://github.com/isaacs/nave.git
+[submodule "libs/zsh-autosuggestions"]
+	path = libs/zsh-autosuggestions
+	url = git://github.com/zsh-users/zsh-autosuggestions
