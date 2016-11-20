@@ -1,9 +1,9 @@
 # Editing
 
 if [[ "$OSTYPE" =~ "^darwin" ]]; then
-  export VISUAL="code"
-  export EDITOR="code"
-  export LESSEDIT="code %f"
+  export VISUAL="code --wait"
+  export EDITOR="code --wait"
+  export LESSEDIT="code --wait %f"
   alias q="code"
 else
   export EDITOR=$(type vi vim 2>/dev/null | sed 's/ .*$//;q')
