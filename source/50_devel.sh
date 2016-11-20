@@ -10,3 +10,4 @@ alias get_last_docker_deploy_log='echo "bin\nget /TWEC_Dev/Docker/last.log /tmp/
 
 PATH=./node_modules/.bin:$(path_remove ./node_modules/.bin)
 PATH=./.bin:$(path_remove ./.bin)
+PATH=$HOME/.yarn/bin:$(path_remove $HOME/.yarn/bin)
