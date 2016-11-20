@@ -57,4 +57,5 @@ PATH=~/.dotfiles/bin:$(path_remove ~/.dotfiles/bin)
 
 # shortcut to get root
 alias up="sudo $SHELL"
-alias irc="mosh irc.penree.com"
+
+source ~/.dotfiles/libs/zsh-autosuggestions/zsh-autosuggestions.zsh
