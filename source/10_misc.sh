@@ -57,5 +57,3 @@ PATH=~/.dotfiles/bin:$(path_remove ~/.dotfiles/bin)
 
 # shortcut to get root
 alias up="sudo $SHELL"
-
-source ~/.dotfiles/libs/zsh-autosuggestions/zsh-autosuggestions.zsh

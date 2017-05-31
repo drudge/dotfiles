@@ -1,3 +1,31 @@
+source "${HOME}/.dotfiles/libs/zgen/zgen.zsh"
+
+ZGEN_RESET_ON_CHANGE=(${HOME}/.dotfiles/link/.zshrc)
+
+# if the init scipt doesn't exist
+if ! zgen saved; then
+    echo "Creating a zgen save"
+
+    zgen oh-my-zsh
+
+    # plugins
+    zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/command-not-found
+    zgen oh-my-zsh plugins/nvm
+    zgen load zsh-users/zsh-autosuggestions
+
+    export NVM_AUTO_USE=true
+    zgen load lukechilds/zsh-nvm
+
+    # completions
+    zgen load zsh-users/zsh-completions src
+
+    # theme
+    zgen load denysdovhan/spaceship-zsh-theme spaceship
+
+    # save all to init script
+    zgen save
+fi
 
 # Source all files in ~/.dotfiles/source/
 function src() {
@@ -15,10 +43,5 @@ function src() {
 function dotfiles() {
   ~/.dotfiles/bin/dotfiles "$@" && src
 }
-
-# load my defined functions
-for file in $HOME/.dotfiles/conf/zsh/functions/*; do
-  source $file
-done
 
 src

@@ -4,9 +4,6 @@
 [submodule "libs/z"]
 	path = libs/z
 	url = git://github.com/rupa/z.git
-[submodule "libs/nave"]
-	path = libs/nave
-	url = git://github.com/isaacs/nave.git
-[submodule "libs/zsh-autosuggestions"]
-	path = libs/zsh-autosuggestions
-	url = git://github.com/zsh-users/zsh-autosuggestions
+[submodule "libs/zgen"]
+	path = libs/zgen
+	url = git://github.com/tarjoilija/zgen.git
