@@ -1,11 +1,9 @@
+export ZGEN_RESET_ON_CHANGE=(${HOME}/.dotfiles/link/.zshrc)
+export NVM_AUTO_USE=true
 source "${HOME}/.dotfiles/libs/zgen/zgen.zsh"
-
-ZGEN_RESET_ON_CHANGE=(${HOME}/.dotfiles/link/.zshrc)
 
 # if the init scipt doesn't exist
 if ! zgen saved; then
-    echo "Creating a zgen save"
-
     zgen oh-my-zsh
 
     # plugins
@@ -14,7 +12,6 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/nvm
     zgen load zsh-users/zsh-autosuggestions
 
-    export NVM_AUTO_USE=true
     zgen load lukechilds/zsh-nvm
 
     # completions
