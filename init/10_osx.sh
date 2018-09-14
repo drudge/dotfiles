@@ -18,7 +18,7 @@ fi
 # Install Homebrew.
 if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
-  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 if [[ "$(type -P brew)" ]]; then
@@ -29,11 +29,20 @@ if [[ "$(type -P brew)" ]]; then
   brew tap homebrew/dupes
 
   # Install Homebrew recipes.
-  recipes=(git tree sl lesspipe id3tool nmap git-extras htop-osx rsync pv man2html the_silver_searcher mosh docker)
+  recipes=(git tree sl lesspipe id3tool nmap git-extras htop-osx rsync pv man2html the_silver_searcher mosh docker mas awscli terraform)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
-    e_header "Installing Homebrew recipes: $list"
+    e_header "Installing Homebrew formulae: $list"
     brew install $list
   fi
+  
+  # Install Homebrew Casks.
+  recipes=(alfred slack google-chrome sketch postico studio-3t sequel-pro tower shimo kaleidoscope paw 1password visual-studio-code mailplane daisydisk docker 1password-cli)
+  list="$(to_install "${recipes[*]}" "$(brew cask list)")"
+  if [[ "$list" ]]; then
+    e_header "Installing Homebrew Casks: $list"
+    brew cask install $list
+  fi
+  
 fi
