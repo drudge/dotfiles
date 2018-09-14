@@ -45,4 +45,12 @@ if [[ "$(type -P brew)" ]]; then
     brew cask install $list
   fi
   
+  # Install Mac App Store apps.
+  recipes=(904280696 407963104 1081203896 924726344 497799835 425424353 1295203466)
+  list="$(to_install "${recipes[*]}" "$(mas list)")"
+  if [[ "$list" ]]; then
+    e_header "Installing Mac App Store apps: $list"
+    mas install $list
+  fi
+  
 fi
