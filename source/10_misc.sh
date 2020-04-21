@@ -3,7 +3,6 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 export FULL_NAME="Nicholas Penree"
-export COMPANY="Weborate Labs"
 export EMAIL="nick@penree.com"
 export TZ="America/New_York"
 
