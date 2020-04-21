@@ -106,3 +106,4 @@ mas 'BrowserFreedom', id: 1081203896
 mas 'Deliveries', id: 924726344
 mas 'Xcode', id: 497799835
 mas 'The Unarchiver', id: 425424353
+mas 'Jump Desktop', id: 524141863
